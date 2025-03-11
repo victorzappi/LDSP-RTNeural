@@ -99,17 +99,19 @@ public:
 
     //VIC
     /**
-     * Sets the value of the output directly.
+     * Sets the value of the ctVec directly.
      *
-     * This method directly assigns the provided values to the `outs` member variable.
+     * This method directly assigns the provided values to the `ctVec` member variable.
      * Use this option if you want to set the output to a specific value after the
      * forward pass or from another part of your code.
      *
-     * @param new_outs The new values to assign to `outs`.
+     * @param new_c The new values to assign to `ctVec`.
      */
-    RTNEURAL_REALTIME void setInitialHiddenState(const Eigen::Matrix<T, out_size, 1>& new_outs) {
-        outs.noalias() = new_outs;
+    RTNEURAL_REALTIME void setInitialCellState(const Eigen::Matrix<T, out_size, 1>& new_c) {
+        cVec.noalias() = new_c;
     }
+
+    Eigen::Map<out_type, RTNeuralEigenAlignment> outs;
 
     //VIC
     /**
@@ -119,10 +121,10 @@ public:
      * Use this option if you want to set the output to a specific value after the
      * forward pass or from another part of your code.
      *
-     * @param new_outs The new values to assign to `ctVec`.
+     * @param new_c The new values to assign to `ctVec`.
      */
-    RTNEURAL_REALTIME void setInitialCellState(const Eigen::Matrix<T, out_size, 1>& new_ct) {
-        ctVec.noalias() = new_ct;
+    RTNEURAL_REALTIME void setInitialCellState(const Eigen::Matrix<T, out_size, 1>& new_c) {
+        cVec.noalias() = new_c;
     }
 
     Eigen::Map<out_type, RTNeuralEigenAlignment> outs;
